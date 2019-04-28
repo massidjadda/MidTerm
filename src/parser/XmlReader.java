@@ -24,18 +24,18 @@ public class XmlReader {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        File file = new File(path);
-        Document doc = builder.parse(file);
+        File file = new File( path );
+        Document doc = builder.parse( file );
         NodeList nodeList = doc.getDocumentElement().getChildNodes();
         List<Student> list = new ArrayList<>();
         for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
+            Node node = nodeList.item( i );
             if (node instanceof Element) {
                 Student student = new Student();
-                student.id = node.getAttributes().getNamedItem(tagName).getNodeValue();
+                student.id = node.getAttributes().getNamedItem( tagName ).getNodeValue();
                 NodeList childNodes = node.getChildNodes();
                 for (int j = 0; j < childNodes.getLength(); j++) {
-                    Node cNode = childNodes.item(j);
+                    Node cNode = childNodes.item( j );
                     if (cNode instanceof Element) {
                         String content = cNode.getLastChild().getTextContent().trim();
                         String data = cNode.getNodeName();
@@ -47,12 +47,12 @@ public class XmlReader {
                                 student.lastName = content;
                                 break;
                             case "score":
-                                student.score = convertIntToChar(content);
+                                student.score = convertIntToChar( content );
                                 break;
                         }
                     }
                 }
-                list.add(student);
+                list.add( student );
             }
 
         }

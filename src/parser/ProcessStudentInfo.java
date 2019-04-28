@@ -36,8 +36,8 @@ public class ProcessStudentInfo {
 
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
         //Path of XML data to be read.
-        String pathSelenium = System.getProperty("user.dir") + "/src/parser/selenium.xml";
-        String pathQtp = System.getProperty("user.dir") + "/src/parser/qtp.xml";
+        String pathSelenium = System.getProperty( "user.dir" ) + "/src/parser/selenium.xml";
+        String pathQtp = System.getProperty( "user.dir" ) + "/src/parser/qtp.xml";
         String tag = "id";
         //Create ConnectToSqlDB Object
         ConnectToMongoDB connectToMongoDB = new ConnectToMongoDB();
@@ -55,7 +55,7 @@ public class ProcessStudentInfo {
 
 
         //Parse Data using parseData method and then store data into Selenium ArrayList.
-        seleniumStudents = xmlReader.parseData(tag, pathSelenium);
+        seleniumStudents = xmlReader.parseData( tag, pathSelenium );
 
         //Parse Data using parseData method and then store data into Qtp ArrayList.
 
@@ -68,15 +68,15 @@ public class ProcessStudentInfo {
 
 
         //Store Qtp data into Qtp table in Database
-        connectToMongoDB.insertIntoMongoDB(seleniumStudents, "qtp");
+        connectToMongoDB.insertIntoMongoDB( seleniumStudents, "qtp" );
         //connectToSqlDB.insertDataFromArrayListToMySql(seleniumStudents, "qtp","studentList");
 
         //Store Selenium data into Selenium table in Database
 
         //Retrieve Qtp students from Database
-        List<Student> stList = connectToMongoDB.readStudentListFromMongoDB("qtp");
+        List<Student> stList = connectToMongoDB.readStudentListFromMongoDB( "qtp" );
         for (Student st : stList) {
-            System.out.println(st.getFirstName() + " " + st.getLastName() + " " + st.getScore() + " " + st.getId());
+            System.out.println( st.getFirstName() + " " + st.getLastName() + " " + st.getScore() + " " + st.getId() );
         }
 
         //Retrieve Selenium students from Database
